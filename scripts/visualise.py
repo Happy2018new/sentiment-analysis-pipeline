@@ -86,7 +86,7 @@ class Visualizer:
             raise Exception("save_tokens_trend: Invalid user input")
 
         # Prepare
-        data = sorted(data, key=lambda t: t.score)
+        data = sorted(data, key=lambda x: x.score)
         x_vals = [t.score for t in data]
         y_vals = [t.count for t in data]
         labels = [mapping.get_lem_token(t.token, "(negative)") for t in data]
@@ -145,7 +145,7 @@ class CSVDumper:
         with open(file_path, "w+", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
             writer.writerow(["comment", "score"])
-            for i in data:
+            for i in sorted(data, key=lambda x: x.score, reverse=True):
                 writer.writerow([i.comment.origin_text, i.score])
 
     @staticmethod
@@ -169,7 +169,7 @@ class CSVDumper:
         with open(file_path, "w+", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
             writer.writerow(["stem_token", "lem_token", "appear_count", "score"])
-            for i in data:
+            for i in sorted(data, key=lambda x: x.score, reverse=True):
                 writer.writerow(
                     [
                         i.token,
