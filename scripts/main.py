@@ -59,7 +59,7 @@ def parse_args() -> Config:
         default=20,
     )
     parser.add_argument(
-        "-visual-tokens-percent",
+        "--visual-tokens-percent",
         type=float,
         help="to show the top N tokens by percentage in the ouput visualization for tokens sentiment trend",
         default=1.0,
