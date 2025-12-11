@@ -66,21 +66,23 @@ Build a Python pipeline to simulate streaming data ingestion, perform sentiment 
 
 
 ## Notes
-- Ensure NLTK corpora are downloaded before running:
-   ```python
-   import nltk
-   nltk.download("gutenberg")
-   nltk.download("genesis")
-   nltk.download("inaugural")
-   nltk.download("nps_chat")
-   nltk.download("webtext")
-   nltk.download("treebank")
-   nltk.download('punkt_tab')
-   nltk.download("averaged_perceptron_tagger_eng")
-   nltk.download("wordnet")
-   nltk.download("stopwords")
-   nltk.download("vader_lexicon")
-   ```
+Ensure NLTK corpora are downloaded before running.<br/>
+Use the following **Python** code to download them.
+
+```python
+import nltk
+nltk.download("gutenberg")
+nltk.download("genesis")
+nltk.download("inaugural")
+nltk.download("nps_chat")
+nltk.download("webtext")
+nltk.download("treebank")
+nltk.download('punkt_tab')
+nltk.download("averaged_perceptron_tagger_eng")
+nltk.download("wordnet")
+nltk.download("stopwords")
+nltk.download("vader_lexicon")
+```
 
 
 
