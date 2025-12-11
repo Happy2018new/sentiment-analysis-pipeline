@@ -5,7 +5,8 @@ from typing import Any
 class IngestReader:
     """IngestReader is the reader that read the ingested data from a file."""
 
-    comments: list[dict[str, Any]]
+    _comments: list[dict[str, Any]]
+    _pointer: int
 
     def __init__(self, file_path: str):
         """
@@ -18,11 +19,12 @@ class IngestReader:
         Args:
             file_path (str): The path point to the ingested data file.
         """
-        self._read(file_path)
+        self._read_all(file_path)
+        self._pointer = 0
 
-    def _read(self, file_path: str) -> None:
+    def _read_all(self, file_path: str) -> None:
         """
-        _read reads all the ingested data from the file,
+        _read_all reads all the ingested data from the file,
         and store the read data into the `self.comments`.
 
         Args:
@@ -32,4 +34,30 @@ class IngestReader:
         with open(file_path, "r+", encoding="utf-8") as file:
             for line in file:
                 streams.append(json.loads(line))
-        self.comments = streams
+        self._comments = streams
+
+    def read_next(self) -> dict[str, Any] | None:
+        """
+        read_next reads the next comment from the ingested data.
+
+        Returns:
+            dict[str, Any] | None:
+                The next comment if exists;
+                otherwise, the underlying pointer meet EOF,
+                and then return None.
+        """
+        if self._pointer >= len(self._comments):
+            return None
+        result = self._comments[self._pointer]
+        self._pointer += 1
+        return result
+
+    def unread(self) -> IngestReader:
+        """
+        unread unread one comment from the ingested data.
+
+        Returns:
+            IngestReader: Returns `IngestReader` itself.
+        """
+        self._pointer = max(0, self._pointer - 1)
+        return self
