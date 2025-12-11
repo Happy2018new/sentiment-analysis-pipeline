@@ -14,6 +14,8 @@ from visualise import Visualizer, CSVDumper
 
 @dataclass
 class Config:
+    """Config is the config of this program."""
+
     input_stream: str
     output_csv_dir: str
     output_plot_dir: str
@@ -22,6 +24,13 @@ class Config:
 
 
 def parse_args() -> Config:
+    """
+    parse_args parses and returns
+    arguments from the command line.
+
+    Returns:
+        Config: The parsed config.
+    """
     parser = argparse.ArgumentParser(
         description="Sentiment Analysis Pipeline",
     )
@@ -67,6 +76,18 @@ def parse_args() -> Config:
 
 
 def get_filter_sentences(path: str) -> list[FilterSentences]:
+    """
+    get_filter_sentences reads the input stream
+    file as multiple filter sentences.
+
+    Args:
+        path (str):
+            The input path of the stream file.
+
+    Returns:
+        list[FilterSentences]:
+            The filter sentences that read from the stream file.
+    """
     reader = IngestReader(path)  # type: IngestReader
     result = []  # type: list[FilterSentences]
 
@@ -86,6 +107,20 @@ def get_filter_sentences(path: str) -> list[FilterSentences]:
 def process_filter_sentences(
     sentences: list[FilterSentences],
 ) -> tuple[list[FilterSentences], StemToLemMapping]:
+    """
+    process_filter_sentences processes the given filter sentences,
+    clean most of the stop words, and then compact the negative
+    tokens and affected tokens into single tokens, and last make
+    the stemmed token to lemmatized token map.
+
+    Args:
+        sentences (list[FilterSentences]):
+            All the comments.
+
+    Returns:
+        tuple[list[FilterSentences], StemToLemMapping]:
+            The process results.
+    """
     sentences = [StopWordCleanner.clean(i) for i in sentences]
     sentences = [InverseCompacter.compact_sentences(i) for i in sentences]
     return sentences, StemToLemMapping().build_mapping(sentences)
@@ -96,6 +131,24 @@ def analysis_filter_sentences(
     mapping: StemToLemMapping,
     percent: float = 0.2,
 ) -> tuple[list[CommentWithScore], list[TokenWithScore]]:
+    """
+    analysis_filter_sentences does the sentiment analysis
+    by the given comments (sentences), mapping and percent.
+
+    Args:
+        sentences (list[FilterSentences]):
+            All the comments.
+        mapping (StemToLemMapping):
+            A map that allows user to get
+            lemmatized token by stemmed token.
+        percent (float, optional):
+            Only count the top `percent` percent tokens.
+            Defaults to 0.2.
+
+    Returns:
+        tuple[list[CommentWithScore], list[TokenWithScore]]:
+            The analysis results.
+    """
     comment_scores = [CommentWithScore(i, True) for i in sentences]
     top_tokens = TokenProcesser.get_top_stem_tokens(sentences, percent)
     token_scores = TokenProcesser.get_token_score(top_tokens, mapping)
@@ -108,6 +161,20 @@ def visual_analysis_results(
     mapping: StemToLemMapping,
     config: Config,
 ) -> None:
+    """
+    visual_analysis_results performs visualization and
+    saves the visualization results to the specified path.
+
+    Args:
+        comment_scores (list[CommentWithScore]):
+            The sentiment scores and original comments of all comments.
+        token_scores (list[TokenWithScore]):
+            The sentiment scores and token payload of all tokens.
+        mapping (StemToLemMapping): _description_
+            The mapping used to find lemmatized token by stemmed token.
+        config (Config):
+            The config of this program.
+    """
     Visualizer.save_comments_trend(
         [i.score for i in comment_scores],
         config.output_plot_dir + "/comments_sentiment_trend.png",
@@ -126,6 +193,23 @@ def dump_csv_file(
     mapping: StemToLemMapping,
     config: Config,
 ) -> None:
+    """
+    dump_csv_file dumps the sentiment
+    analysis results to CSV files.
+
+    Note that all data will be sorted
+    before save to the csv file.
+
+    Args:
+        comment_scores (list[CommentWithScore]):
+            The sentiment scores and original comments of all comments.
+        token_scores (list[TokenWithScore]):
+            The sentiment scores and token payload of all tokens.
+        mapping (StemToLemMapping):
+            The mapping used to find lemmatized token by stemmed token.
+        config (Config):
+            The config of this program.
+    """
     CSVDumper.dump_comments_trend(
         config.output_csv_dir + "/comments_sentiment_trend.csv",
         comment_scores,
@@ -138,6 +222,14 @@ def dump_csv_file(
 
 
 def print_exit_message(config: Config) -> None:
+    """
+    print_exit_message is executed after all the things are done.
+    This function is just used to print some exit messages,
+    to make the user know all of those things have been completed.
+
+    Args:
+        config (Config): The config of this program.
+    """
     print("Sentiment analysis pipeline has completed successfully.")
     print()
     print(
@@ -150,6 +242,7 @@ def print_exit_message(config: Config) -> None:
 
 
 def main() -> None:
+    """main is the entry point of this program."""
     config = parse_args()
     sentences = get_filter_sentences(config.input_stream)
     sentences, mapping = process_filter_sentences(sentences)
