@@ -12,6 +12,7 @@
   - [How to Run](#how-to-run)
   - [Notes](#notes)
   - [Deliverables](#deliverables)
+  - [LICENSE and Contribute](#license-and-contribute)
 
 
 
@@ -41,7 +42,7 @@ Build a Python pipeline to simulate streaming data ingestion, perform sentiment 
    python scripts/main.py
    ```
 
-   > Then see the following words to see all the arguments/options that program allowed.
+   > Then see the following words to see all the arguments/options that this program allowed.
    ```shell
    usage: main.py [-h] --input-stream INPUT_STREAM --output-csv-dir OUTPUT_CSV_DIR --output-plot-dir OUTPUT_PLOT_DIR [--visual-comments-chunks VISUAL_COMMENTS_CHUNKS]
                [-visual-tokens-percent VISUAL_TOKENS_PERCENT]
@@ -87,3 +88,9 @@ Build a Python pipeline to simulate streaming data ingestion, perform sentiment 
 - Clean scripts that can used on production environment
 - Output CSV with sentiment scores that can used for development and further processing
 - Visualized images can be used for manual demonstrations (speeches)
+
+
+
+## LICENSE and Contribute
+See [LICENSE](./LICENSE) for more information.<br/>
+Contribute this project on [GitHub](https://github.com/Happy2018new/sentiment-analysis-pipeline).
