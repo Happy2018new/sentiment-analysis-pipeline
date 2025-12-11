@@ -80,6 +80,12 @@ class LemmerWrapper:
 
 
 class FilterSentences:
+    """
+    FilterSentences is corresponding to a single comment,
+    and stores the sentence tokens, word tokens,
+    stemmed tokens and lemmatized tokens of this comment.
+    """
+
     origin_text: str
     sent_tokens: list[str]
     word_tokens: list[list[str]]
@@ -87,6 +93,11 @@ class FilterSentences:
     lem_tokens: list[list[str]]
 
     def __init__(self, text: str) -> None:
+        """Initializes a new FilterSentences by the given comment text.
+
+        Args:
+            text (str): The comment text of this FilterSentences.
+        """
         self.origin_text = text
         self.sent_tokens = nltk.sent_tokenize(self.origin_text)
         self.word_tokens = [nltk.word_tokenize(i) for i in self.sent_tokens]
@@ -98,6 +109,11 @@ class FilterSentences:
         ]
 
     def __repr__(self) -> str:
+        """Returns the string representation of this FilterSentences.
+
+        Returns:
+            str: The string representation of this FilterSentences.
+        """
         result = "FilterSentences("
         result += f"origin_text={json.dumps(self.origin_text,ensure_ascii=False)}, "
         result += f"sent_tokens={self.sent_tokens}, "
