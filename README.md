@@ -45,7 +45,7 @@ Build a Python pipeline to simulate streaming data ingestion, perform sentiment 
    > Then see the following words to see all the arguments/options that this program allowed.
    ```shell
    usage: main.py [-h] --input-stream INPUT_STREAM --output-csv-dir OUTPUT_CSV_DIR --output-plot-dir OUTPUT_PLOT_DIR [--visual-comments-chunks VISUAL_COMMENTS_CHUNKS]
-               [-visual-tokens-percent VISUAL_TOKENS_PERCENT]
+                  [-visual-tokens-percent VISUAL_TOKENS_PERCENT]
 
    Sentiment Analysis Pipeline
 
