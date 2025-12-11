@@ -34,7 +34,14 @@ Build a Python pipeline to simulate streaming data ingestion, perform sentiment 
    pip install -r requirements.txt
    ```
 
+
 2. Usge
+   > First run this command on shell to ensure you can running this program.
+   ```shell
+   python scripts/main.py
+   ```
+
+   > Then see the following words to see all the arguments/options that program allowed.
    ```shell
    usage: main.py [-h] --input-stream INPUT_STREAM --output-csv-dir OUTPUT_CSV_DIR --output-plot-dir OUTPUT_PLOT_DIR [--visual-comments-chunks VISUAL_COMMENTS_CHUNKS]
                [-visual-tokens-percent VISUAL_TOKENS_PERCENT]
