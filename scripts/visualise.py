@@ -152,7 +152,8 @@ class CSVDumper:
     def dump_tokens_trend(
         file_path: str, data: list[TokenWithScore], mapping: StemToLemMapping
     ) -> None:
-        """dump_tokens_trend dumps the tokens sentiment trend to a CSV file.
+        """
+        dump_tokens_trend dumps the tokens sentiment trend to a CSV file.
         Note that if `file_path` is not exists, then it will be created.
 
         Args:

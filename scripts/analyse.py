@@ -40,7 +40,9 @@ class CommentProcesser:
     def process_comment(
         sentences: FilterSentences, average_mode: bool = False
     ) -> float:
-        """process_comment computes the sentiment score of this comment.
+        """
+        process_comment computes the
+        sentiment score of this comment.
 
         Args:
             sentences (FilterSentences): The FilterSentences to be processed.

@@ -247,7 +247,9 @@ class StemToLemMapping:
     mapping: dict[str, str] = field(default_factory=lambda: {})
 
     def build_mapping(self, sentences: list[FilterSentences]) -> StemToLemMapping:
-        """build_mapping initializes current mapping by the given sentences.
+        """
+        build_mapping initializes current
+        mapping by the given sentences.
 
         Args:
             sentences (list[FilterSentences]): The given FilterSentences.
@@ -279,7 +281,9 @@ class StemToLemMapping:
         return stem_token in self.mapping
 
     def get_lem_token(self, stem_token: str, negative_prefix: str = "not") -> str:
-        """get_lem_token finds the lemmatized token by the given stem_token.
+        """
+        get_lem_token finds the lemmatized
+        token by the given stem_token.
 
         Args:
             stem_token (str): The given stem_token.
