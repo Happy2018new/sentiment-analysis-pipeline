@@ -1,2 +1,4 @@
-# Adjust and update as needed
+numpy
 nltk
+matplotlib
+adjustText
