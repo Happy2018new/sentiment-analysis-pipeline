@@ -1,0 +1,10 @@
+stem_token,lem_token,appear_count,score
+terribl,terrible,1,-0.4767
+special,special,1,0.4019
+pretti,pretty,1,0.4939
+okay,okay,1,0.2263
+love,love,1,0.6369
+fantast,fantastic,1,0.5574
+disappoint,disappointed,1,-0.4767
+brilliant,brilliant,1,0.5859
+NEG_recommend,(negative) recommend,1,-0.267288
