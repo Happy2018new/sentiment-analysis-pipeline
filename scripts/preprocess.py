@@ -87,18 +87,21 @@ class FilterSentences:
     """
 
     origin_text: str
+    timestamp: str
     sent_tokens: list[str]
     word_tokens: list[list[str]]
     stem_tokens: list[list[str]]
     lem_tokens: list[list[str]]
 
-    def __init__(self, text: str) -> None:
-        """Initializes a new FilterSentences by the given comment text.
+    def __init__(self, text: str, timestamp: str) -> None:
+        """Creates and returns a new FilterSentences.
 
         Args:
             text (str): The comment text of this FilterSentences.
+            timestamp (str): The submit time of this comment.
         """
         self.origin_text = text
+        self.timestamp = timestamp
         self.sent_tokens = nltk.sent_tokenize(self.origin_text)
         self.word_tokens = [nltk.word_tokenize(i) for i in self.sent_tokens]
         self.stem_tokens = [
@@ -116,6 +119,7 @@ class FilterSentences:
         """
         result = "FilterSentences("
         result += f"origin_text={json.dumps(self.origin_text,ensure_ascii=False)}, "
+        result += f"timestamp={self.timestamp}, "
         result += f"sent_tokens={self.sent_tokens}, "
         result += f"word_tokens={self.word_tokens}, "
         result += f"stem_tokens={self.stem_tokens}, "

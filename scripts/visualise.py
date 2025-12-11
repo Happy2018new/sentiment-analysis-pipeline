@@ -144,9 +144,9 @@ class CSVDumper:
         Path(file_path).parent.mkdir(parents=True, exist_ok=True)
         with open(file_path, "w+", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
-            writer.writerow(["comment", "score"])
+            writer.writerow(["comment", "timestamp", "score"])
             for i in sorted(data, key=lambda x: x.score, reverse=True):
-                writer.writerow([i.comment.origin_text, i.score])
+                writer.writerow([i.comment.origin_text, i.comment.timestamp, i.score])
 
     @staticmethod
     def dump_tokens_trend(
