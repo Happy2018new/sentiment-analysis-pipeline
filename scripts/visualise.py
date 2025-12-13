@@ -165,7 +165,6 @@ class CSVDumper:
                 The mapping that allows user get
                 lemmatized token by stemmed token.
         """
-
         Path(file_path).parent.mkdir(parents=True, exist_ok=True)
         with open(file_path, "w+", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
